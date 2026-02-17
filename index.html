@@ -132,10 +132,10 @@
     transition: opacity 1s ease;
     pointer-events: none;
     padding: 20px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
   }
   .screen.active { opacity: 1; pointer-events: all; }
+  #screen4 { justify-content: flex-start; padding-top: 10px; }
 
   /* Screen 1: Rose/Envelope */
   .opener-wrapper { cursor: pointer; animation: gentleBounce 2.5s ease-in-out infinite; text-align: center; }
@@ -339,11 +339,23 @@
   }
 
   /* Screen 4: Celebration */
-  .celebration { text-align: center; z-index: 100; animation: slideIn 0.8s ease; }
+  .celebration {
+    text-align: center;
+    z-index: 100;
+    animation: slideIn 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+  }
   .celeb-hearts {
-    font-size: 90px;
+    font-size: 44px;
     animation: celebSpin 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 40px rgba(255, 80, 130, 0.8));
+    filter: drop-shadow(0 0 20px rgba(255, 80, 130, 0.8));
+    margin-bottom: 2px;
   }
   @keyframes celebSpin {
     0%, 100% { transform: scale(1) rotate(-3deg); }
@@ -351,53 +363,54 @@
   }
   .celeb-title {
     font-family: 'Aref Ruqaa Ink', serif;
-    font-size: 50px;
-    margin: 20px 0 5px;
+    font-size: 28px;
+    margin: 4px 0 2px;
     background: linear-gradient(135deg, #ff5c8a, #ffb6c1, #fff, #ffb6c1, #ff5c8a);
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     animation: shimmer 3s ease infinite;
   }
-  body.en .celeb-title { font-family: 'Dancing Script', cursive; font-size: 52px; }
+  body.en .celeb-title { font-family: 'Dancing Script', cursive; font-size: 30px; }
   .celeb-subtitle {
     font-family: 'Lemonada', cursive;
-    font-size: 18px;
+    font-size: 13px;
     color: #ff8aaf;
-    margin-bottom: 15px;
+    margin-bottom: 6px;
   }
   .celeb-msg {
-    font-size: 19px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.88);
     max-width: 480px;
-    line-height: 2;
-    margin: 10px auto 0;
+    line-height: 1.6;
+    margin: 4px auto 0;
     font-weight: 300;
     text-align: center;
   }
   .celeb-msg .name {
     font-family: 'Aref Ruqaa Ink', serif;
-    font-size: 26px;
+    font-size: 18px;
     color: #ff8aaf;
   }
-  body.en .celeb-msg .name { font-family: 'Dancing Script', cursive; font-size: 24px; color: #ffb6c1; }
+  body.en .celeb-msg .name { font-family: 'Dancing Script', cursive; font-size: 17px; color: #ffb6c1; }
   .celeb-footer {
-    margin-top: 35px;
+    margin-top: 10px;
     font-family: 'Aref Ruqaa Ink', serif;
-    font-size: 30px;
+    font-size: 20px;
     color: #ff5c8a;
     animation: pulse 2s ease-in-out infinite;
   }
-  body.en .celeb-footer { font-family: 'Dancing Script', cursive; font-size: 28px; color: #ff6b95; }
+  body.en .celeb-footer { font-family: 'Dancing Script', cursive; font-size: 19px; color: #ff6b95; }
   .celeb-tiny {
-    margin-top: 12px;
-    font-size: 14px;
+    margin-top: 4px;
+    font-size: 11px;
     opacity: 0.4;
   }
 
   /* Our photo */
   .our-photo-wrapper {
-    margin: 20px auto;
+    margin: 6px auto;
     text-align: center;
     animation: photoReveal 1.5s ease 0.5s both;
   }
@@ -406,13 +419,13 @@
     to { opacity: 1; transform: scale(1) rotate(0deg); }
   }
   .our-photo {
-    width: 200px;
-    height: 260px;
+    width: 110px;
+    height: 145px;
     object-fit: cover;
     object-position: top;
-    border-radius: 20px;
-    border: 3px solid rgba(255, 150, 180, 0.4);
-    box-shadow: 0 10px 40px rgba(255, 80, 130, 0.3), 0 0 60px rgba(255, 80, 130, 0.1);
+    border-radius: 14px;
+    border: 2px solid rgba(255, 150, 180, 0.4);
+    box-shadow: 0 6px 25px rgba(255, 80, 130, 0.3), 0 0 40px rgba(255, 80, 130, 0.1);
     transition: transform 0.4s ease;
   }
   .our-photo:hover {
@@ -420,13 +433,13 @@
   }
   .photo-caption {
     font-family: 'Lemonada', cursive;
-    font-size: 15px;
+    font-size: 11px;
     color: #ffb6c1;
-    margin-top: 12px;
+    margin-top: 4px;
     opacity: 0.85;
     animation: pulse 2s ease-in-out infinite;
   }
-  body.en .photo-caption { font-family: 'Dancing Script', cursive; font-size: 17px; }
+  body.en .photo-caption { font-family: 'Dancing Script', cursive; font-size: 13px; }
 
   /* Confetti */
   .confetti-piece {
@@ -458,15 +471,15 @@
     body.en .letter-name { font-size: 32px; }
     .letter-body { font-size: 15px; line-height: 1.9; }
     body.en .letter-body { font-size: 14px; }
-    .letter-box { padding: 25px 18px; max-height: 80vh; overflow-y: auto; }
+    .letter-box { padding: 25px 18px; }
     .letter-sub { font-size: 13px; }
     .question-text { font-size: 22px; }
     body.en .question-text { font-size: 24px; }
-    .celeb-title { font-size: 30px; }
-    body.en .celeb-title { font-size: 32px; }
-    .celeb-msg { font-size: 15px; }
-    .celeb-subtitle { font-size: 15px; }
-    .celeb-footer { font-size: 24px; }
+    .celeb-title { font-size: 22px; }
+    body.en .celeb-title { font-size: 24px; }
+    .celeb-msg { font-size: 12px; line-height: 1.5; }
+    .celeb-subtitle { font-size: 11px; }
+    .celeb-footer { font-size: 17px; }
     .opener-emoji { font-size: 70px; }
     .opener-text { font-size: 16px; padding: 0 10px; }
     .opener-hint { font-size: 12px; padding: 0 15px; }
@@ -475,10 +488,12 @@
     .question-emoji { font-size: 60px; }
     .lang-toggle { font-size: 11px; padding: 6px 12px; top: 10px; left: 10px; }
     .buttons-row { gap: 12px; flex-direction: column; }
-    .celebration { padding: 0 15px; }
-    .celeb-hearts { font-size: 70px; }
-    .our-photo { width: 160px; height: 210px; border-radius: 16px; }
-    .photo-caption { font-size: 13px; }
+    .celebration { padding: 0 10px; }
+    .celeb-hearts { font-size: 32px; }
+    .our-photo { width: 90px; height: 115px; border-radius: 12px; }
+    .photo-caption { font-size: 10px; }
+    .celeb-tiny { font-size: 10px; }
+    #screen4 { padding-top: 8px; }
     .continue-btn { padding: 12px 30px; font-size: 16px; }
     .attempts-msg { font-size: 14px; padding: 0 10px; }
   }
@@ -537,15 +552,15 @@
     </div>
     <div class="celeb-msg" id="celebMsg">
        <span class="name">ياسميىہ </span> ،
-      <br><br>
+      <br>
       حبيبتي مش محتاجة يوم في السنة عشان أقولها إنها أحلى حاجة حصلتلي في حياتي.
-      <br><br>
+      <br>
      انتي حبيبتي ونور عيني و كل يوم معاكي هو Valentine.
       <br>
      زعلك غالي عليا وعمره مايهون علي قلبي والله.. حقك عليا من اي حاجة تزعلك.
       <br>
       خليكي عارفة دايماً ان شادي حبيبك بيحبك من قلبه وهيضل هنا جنبك طول العمر ان شاء الله ❤️
-      <br><br>
+      <br>
      وأتطمني، انا مش هزعلك ولا هسيب جواكي اي حاجة وحشة ابداً 🫂❤️
     </div>
     <div class="celeb-footer" id="celebFooter">بحبك يا عيون شادي حبيبك ❤️❤️</div>
@@ -630,15 +645,15 @@
       celebTitle: 'أحلى  أيووووة  في حيااااااااتي ❤️❤️',
       celebSub: ' ❤️❤️❤️😂 ومن قلبك انا عااارف ',
       celebMsg: ` <span class="name">ياسميىہ </span> ،
-      <br><br>
+      <br>
       حبيبتي مش محتاجة يوم في السنة عشان أقولها إنها أحلى حاجة حصلتلي في حياتي.
-      <br><br>
+      <br>
      انتي حبيبتي ونور عيني و كل يوم معاكي هو Valentine.
       <br>
      زعلك غالي عليا وعمره مايهون علي قلبي والله.. حقك عليا من اي حاجة تزعلك.
       <br>
       خليكي عارفة دايماً ان شادي حبيبك بيحبك من قلبه وهيضل هنا جنبك طول العمر ان شاء الله ❤️
-      <br><br>
+      <br>
      وأتطمني، انا مش هزعلك ولا هسيب جواكي اي حاجة وحشة ابداً 🫂❤️`,
       celebFooter: 'بحبك يا عيون شادي حبيبك ❤️❤️',
       celebTiny: '~ من حبيب ياسمين~',
@@ -670,15 +685,15 @@
       celebTitle: 'The sweetest YES in my lifeee ❤️❤️',
       celebSub: ' ❤️❤️❤️😂 and from your heart I knooow ',
       celebMsg: ` <span class="name">Yasmeen</span> ,
-      <br><br>
+      <br>
       My hbibt doesn't need a day in the year for me to tell her she's the best thing that happened in my life.
-      <br><br>
+      <br>
       2nti hbibti, w nor 3youni, and every day with you is Valentine's.
       <br>
       Your sadness is precious to me and it never sits right in my heart wallahi.. forgive me for anything that upset you.
       <br>
       Always know that Shady hbibk loves you from his heart and will stay right here beside you forever inshallah ❤️
-      <br><br>
+      <br>
       And don't worry, I'll never upset you or leave anything bad inside you ever 🫂❤️`,
       celebFooter: 'Love you ya eyes of Shady hbibk ❤️❤️',
       celebTiny: '~ from Yasmeen\'s hbib ~',
