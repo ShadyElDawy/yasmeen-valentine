@@ -648,8 +648,9 @@
     document.getElementById('celebFooter').textContent = c.celebFooter;
     document.getElementById('celebTiny').textContent = c.celebTiny;
 
-    // Reset letter typewriter if on screen1
+    // Reset state
     charIndex = 0;
+    clearTimeout(typewriterTimer);
     document.getElementById('letterContent').innerHTML = '';
     noCount = 0;
     document.getElementById('noAttempts').textContent = '';
@@ -659,6 +660,11 @@
     btn.style.top = '';
     btn.style.display = '';
     btn.classList.remove('shrinking');
+
+    // If currently on the letter screen, restart the typewriter
+    if (document.getElementById('screen2').classList.contains('active')) {
+      typeWriter();
+    }
   }
 
   // ============ SCREENS ============
@@ -676,6 +682,7 @@
 
   // ============ TYPEWRITER ============
   let charIndex = 0;
+  let typewriterTimer = null;
   function typeWriter() {
     const text = content[lang].letterBody;
     const el = document.getElementById('letterContent');
@@ -692,7 +699,7 @@
         el.innerHTML += text[charIndex];
         charIndex++;
       }
-      setTimeout(typeWriter, 20);
+      typewriterTimer = setTimeout(typeWriter, 20);
     }
   }
 
