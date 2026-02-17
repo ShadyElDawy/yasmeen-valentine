@@ -299,24 +299,33 @@
     box-shadow: 0 14px 50px rgba(255, 51, 102, 0.75);
   }
   .btn-no {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 80, 130, 0.15);
+    border: 2px solid rgba(255, 120, 170, 0.4);
     padding: 15px 40px;
     border-radius: 50px;
-    color: rgba(255, 255, 255, 0.7);
+    color: #ffb6c1;
     font-size: 20px;
     font-family: 'Cairo', sans-serif;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.18s ease;
     z-index: 4;
     white-space: nowrap;
     flex-shrink: 0;
+    box-shadow: 0 4px 20px rgba(255, 80, 130, 0.2);
+    backdrop-filter: blur(10px);
   }
   body.en .btn-no { font-family: 'Quicksand', sans-serif; }
-  .btn-no.shrinking {
-    transform: scale(0.6) !important;
-    opacity: 0.3 !important;
+  .btn-no.running {
+    animation: wiggle 0.4s ease infinite;
+    background: rgba(255, 80, 130, 0.2);
+    border-color: rgba(255, 120, 170, 0.5);
+    box-shadow: 0 4px 25px rgba(255, 80, 130, 0.35);
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-4deg); }
+    75% { transform: rotate(4deg); }
   }
   .attempts-msg {
     margin-top: 25px;
@@ -659,7 +668,7 @@
     btn.style.left = '';
     btn.style.top = '';
     btn.style.display = '';
-    btn.classList.remove('shrinking');
+    btn.classList.remove('running');
 
     // If currently on the letter screen, restart the typewriter
     if (document.getElementById('screen2').classList.contains('active')) {
@@ -737,7 +746,7 @@
     btn.style.transition = 'all 0.18s ease';
 
     noCount++;
-    if (noCount >= 4) btn.classList.add('shrinking');
+    btn.classList.add('running');
 
     const c = content[lang];
     const el = document.getElementById('noAttempts');
