@@ -227,15 +227,15 @@
     justify-content: center;
     min-height: 70px;
     position: relative;
-    flex-wrap: wrap;
+    direction: ltr;
   }
   .btn-yes {
     background: linear-gradient(135deg, #ff3366, #ff6b95);
     border: none;
-    padding: 17px 50px;
+    padding: 15px 32px;
     border-radius: 50px;
     color: #fff;
-    font-size: 22px;
+    font-size: 20px;
     font-family: 'Cairo', sans-serif;
     font-weight: 700;
     cursor: pointer;
@@ -243,25 +243,26 @@
     box-shadow: 0 10px 35px rgba(255, 51, 102, 0.5);
     z-index: 5;
     white-space: nowrap;
+    flex-shrink: 0;
   }
   .btn-yes:hover {
-    transform: scale(1.12);
+    transform: scale(1.08);
     box-shadow: 0 14px 50px rgba(255, 51, 102, 0.75);
   }
   .btn-no {
-    background: rgba(255, 255, 255, 0.06);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    padding: 17px 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    padding: 15px 40px;
     border-radius: 50px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 22px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
     font-family: 'Cairo', sans-serif;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
-    position: relative;
     z-index: 4;
     white-space: nowrap;
+    flex-shrink: 0;
   }
   .btn-no.shrinking {
     transform: scale(0.6) !important;
@@ -364,7 +365,7 @@
     .celeb-msg { font-size: 16px; }
     .rose-emoji { font-size: 80px; }
     .rose-text { font-size: 19px; }
-    .btn-yes, .btn-no { padding: 14px 36px; font-size: 18px; }
+    .btn-yes, .btn-no { padding: 12px 24px; font-size: 16px; }
     .question-emoji { font-size: 70px; }
   }
 </style>
