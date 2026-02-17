@@ -132,6 +132,8 @@
     transition: opacity 1s ease;
     pointer-events: none;
     padding: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .screen.active { opacity: 1; pointer-events: all; }
 
@@ -419,21 +421,31 @@
 
   /* Responsive */
   @media (max-width: 600px) {
-    .letter-name { font-size: 42px; }
-    body.en .letter-name { font-size: 36px; }
-    .letter-body { font-size: 16px; }
-    body.en .letter-body { font-size: 15px; }
-    .letter-box { padding: 30px 22px; }
-    .question-text { font-size: 24px; }
-    body.en .question-text { font-size: 28px; }
-    .celeb-title { font-size: 36px; }
-    body.en .celeb-title { font-size: 38px; }
-    .celeb-msg { font-size: 16px; }
-    .opener-emoji { font-size: 80px; }
-    .opener-text { font-size: 19px; }
-    .btn-yes, .btn-no { padding: 12px 24px; font-size: 16px; }
-    .question-emoji { font-size: 70px; }
-    .lang-toggle { font-size: 12px; padding: 6px 14px; }
+    .letter-name { font-size: 38px; }
+    body.en .letter-name { font-size: 32px; }
+    .letter-body { font-size: 15px; line-height: 1.9; }
+    body.en .letter-body { font-size: 14px; }
+    .letter-box { padding: 25px 18px; max-height: 80vh; overflow-y: auto; }
+    .letter-sub { font-size: 13px; }
+    .question-text { font-size: 22px; }
+    body.en .question-text { font-size: 24px; }
+    .celeb-title { font-size: 30px; }
+    body.en .celeb-title { font-size: 32px; }
+    .celeb-msg { font-size: 15px; }
+    .celeb-subtitle { font-size: 15px; }
+    .celeb-footer { font-size: 24px; }
+    .opener-emoji { font-size: 70px; }
+    .opener-text { font-size: 16px; padding: 0 10px; }
+    .opener-hint { font-size: 12px; padding: 0 15px; }
+    .btn-yes { padding: 12px 20px; font-size: 14px; }
+    .btn-no { padding: 12px 24px; font-size: 14px; }
+    .question-emoji { font-size: 60px; }
+    .lang-toggle { font-size: 11px; padding: 6px 12px; top: 10px; left: 10px; }
+    .buttons-row { gap: 12px; flex-direction: column; }
+    .celebration { padding: 0 15px; }
+    .celeb-hearts { font-size: 70px; }
+    .continue-btn { padding: 12px 30px; font-size: 16px; }
+    .attempts-msg { font-size: 14px; padding: 0 10px; }
   }
 </style>
 </head>
@@ -472,7 +484,7 @@
     </div>
     <div class="buttons-row" id="buttonsRow">
       <button class="btn-yes" id="btnYes" onclick="sayYes()">أيوة طبعاً سامحتك 🥺❤️ (بس متزعلنيش تاني) </button>
-      <button class="btn-no" id="btnNo" onmouseover="runAway()" ontouchstart="runAway()">لاأاااااااااا 😤</button>
+      <button class="btn-no" id="btnNo" onmouseover="runAway()" ontouchstart="runAway(event)">لاأاااااااااا 😤</button>
     </div>
     <div class="attempts-msg" id="noAttempts"></div>
   </div>
@@ -717,15 +729,18 @@
   // ============ RUNAWAY BUTTON ============
   let noCount = 0;
 
-  function runAway() {
+  function runAway(e) {
+    if (e && e.preventDefault) e.preventDefault();
     const btn = document.getElementById('btnNo');
     const yesBtn = document.getElementById('btnYes');
     const yesRect = yesBtn.getBoundingClientRect();
     const margin = 30;
-    const btnW = 140;
-    const btnH = 55;
-    const maxX = window.innerWidth - btnW;
-    const maxY = window.innerHeight - btnH;
+    const btnRect = btn.getBoundingClientRect();
+    const btnW = Math.max(btnRect.width, 100);
+    const btnH = Math.max(btnRect.height, 45);
+    const safeMargin = 10;
+    const maxX = window.innerWidth - btnW - safeMargin;
+    const maxY = window.innerHeight - btnH - safeMargin;
 
     let newX, newY, tries = 0;
     do {
