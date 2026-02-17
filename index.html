@@ -395,6 +395,39 @@
     opacity: 0.4;
   }
 
+  /* Our photo */
+  .our-photo-wrapper {
+    margin: 20px auto;
+    text-align: center;
+    animation: photoReveal 1.5s ease 0.5s both;
+  }
+  @keyframes photoReveal {
+    from { opacity: 0; transform: scale(0.8) rotate(-3deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+  .our-photo {
+    width: 200px;
+    height: 260px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 150, 180, 0.4);
+    box-shadow: 0 10px 40px rgba(255, 80, 130, 0.3), 0 0 60px rgba(255, 80, 130, 0.1);
+    transition: transform 0.4s ease;
+  }
+  .our-photo:hover {
+    transform: scale(1.05) rotate(2deg);
+  }
+  .photo-caption {
+    font-family: 'Lemonada', cursive;
+    font-size: 15px;
+    color: #ffb6c1;
+    margin-top: 12px;
+    opacity: 0.85;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  body.en .photo-caption { font-family: 'Dancing Script', cursive; font-size: 17px; }
+
   /* Confetti */
   .confetti-piece {
     position: fixed;
@@ -444,6 +477,8 @@
     .buttons-row { gap: 12px; flex-direction: column; }
     .celebration { padding: 0 15px; }
     .celeb-hearts { font-size: 70px; }
+    .our-photo { width: 160px; height: 210px; border-radius: 16px; }
+    .photo-caption { font-size: 13px; }
     .continue-btn { padding: 12px 30px; font-size: 16px; }
     .attempts-msg { font-size: 14px; padding: 0 10px; }
   }
@@ -496,6 +531,10 @@
     <div class="celeb-hearts">💖</div>
     <div class="celeb-title" id="celebTitle">أحلى  أيووووة  في حيااااااااتي ❤️❤️</div>
     <div class="celeb-subtitle" id="celebSub"> ❤️❤️❤️😂 ومن قلبك انا عااارف </div>
+    <div class="our-photo-wrapper">
+      <img src="us.png" alt="Us" class="our-photo" />
+      <div class="photo-caption" id="photoCaption">أحلى اتنين في الدنيا 🤍</div>
+    </div>
     <div class="celeb-msg" id="celebMsg">
        <span class="name">ياسميىہ </span> ،
       <br><br>
@@ -603,6 +642,7 @@
      وأتطمني، انا مش هزعلك ولا هسيب جواكي اي حاجة وحشة ابداً 🫂❤️`,
       celebFooter: 'بحبك يا عيون شادي حبيبك ❤️❤️',
       celebTiny: '~ من حبيب ياسمين~',
+      photoCaption: 'أحلى اتنين في الدنيا 🤍',
     },
     en: {
       toggleBtn: 'عايزاها بالعربي؟ بس كده؟ عيوني لالك 💕',
@@ -642,6 +682,7 @@
       And don't worry, I'll never upset you or leave anything bad inside you ever 🫂❤️`,
       celebFooter: 'Love you ya eyes of Shady hbibk ❤️❤️',
       celebTiny: '~ from Yasmeen\'s hbib ~',
+      photoCaption: 'The most beautiful two in the world 🤍',
     }
   };
 
@@ -668,6 +709,7 @@
     document.getElementById('celebMsg').innerHTML = c.celebMsg;
     document.getElementById('celebFooter').textContent = c.celebFooter;
     document.getElementById('celebTiny').textContent = c.celebTiny;
+    document.getElementById('photoCaption').textContent = c.photoCaption;
 
     // Reset state
     charIndex = 0;
